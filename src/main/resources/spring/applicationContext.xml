@@ -95,6 +95,7 @@
 	<!--依赖注入的bean-->
 	<bean id="bookService" class="cn.hn.bookstore.service.impl.BookService"/>
 	<!--service层配置  -->
+	<bean id="businessServiceImpl" class="cn.hn.bookstore.service.impl.BusinessServiceImpl"/>
 	
 	<!--<bean id="administratorService" class="cn.art.edu.service.impl.AdministratorServiceImpl"/>-->
 	<!--<bean id="bossService" class="cn.art.edu.service.impl.BossServiceImpl"/>-->
