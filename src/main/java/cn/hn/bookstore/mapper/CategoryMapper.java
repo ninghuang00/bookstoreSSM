@@ -2,7 +2,12 @@ package cn.hn.bookstore.mapper;
 
 import cn.hn.bookstore.po.Category;
 
+import java.util.List;
+
 public interface CategoryMapper {
+
+    List<Category> queryAllCategories();
+
     int deleteByPrimaryKey(String id);
 
     int insert(Category record);

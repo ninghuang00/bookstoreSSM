@@ -114,4 +114,26 @@
       category_id = #{categoryId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <select id="queryAllBooks" resultType="cn.hn.bookstore.po.Book">
+    SELECT *
+    from book
+  </select>
+  <select id="getTotalRecord" parameterType="java.lang.String">
+    SELECT COUNT(*)
+    FROM  book
+    <where>
+      <if test="#{category_id} != null">
+        category_id = #{category_id,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <select id="getPageData" >
+    SELECT * FROM book
+    <where>
+      <if test="#{category_id} != null">
+        category_id = #{category_id}
+      </if>
+    </where>
+    limit #{startindex,},#{pagesize}
+  </select>
 </mapper>

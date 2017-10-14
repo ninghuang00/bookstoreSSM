@@ -6,14 +6,13 @@ import java.util.Map;
 
 import cn.hn.bookstore.mapper.BookMapper;
 import cn.hn.bookstore.mapper.CategoryMapper;
+import cn.hn.bookstore.mapper.OrderMapper;
 import cn.hn.bookstore.mapper.UserMapper;
 import cn.hn.bookstore.po.*;
 import cn.hn.bookstore.po.Category;
 import cn.hn.bookstore.service.BusinessService;
 import cn.hn.bookstore.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 /*import cn.hn.utils.DaoFactory;
 import cn.hn.utils.Permission;
 import cn.hn.utils.WebUtils;*/
@@ -30,6 +29,8 @@ public class BusinessServiceImpl implements BusinessService {
 	private BookMapper bookMapper;
 	@Autowired
 	private UserMapper userMapper;
+	@Autowired
+	private OrderMapper orderMapper;
 
 	/*
 	 * 添加图书分类
@@ -65,7 +66,7 @@ public class BusinessServiceImpl implements BusinessService {
 	@Override
 	public List<Category> getAllCategory() {
 		//return dao.getAll();
-		return null;
+		return categoryMapper.queryAllCategories();
 	}
 
 	/*
@@ -106,7 +107,7 @@ public class BusinessServiceImpl implements BusinessService {
 	@Override
 	public List<Book> getAllBook() {
 		//return bdao.getAll();
-		return null;
+		return bookMapper.queryAllBooks();
 	}
 
 	/*
@@ -128,18 +129,17 @@ public class BusinessServiceImpl implements BusinessService {
 	 */
 	@Override
 	public Page getPageData(String pagenum, String category_id) {
-		/*int totalrecord = bdao.getTotalRecord(category_id);
-		Page page = null;
+		int totalrecord = bookMapper.getTotalRecord(category_id);
+		Page page ;
 		if (pagenum == null) {
 			page = new Page(1, totalrecord);
 		} else {
 			page = new Page(Integer.parseInt(pagenum), totalrecord);
 		}
 
-		List<Book> books = bdao.getPageData(page.getStartindex(), page.getPagesize(), category_id);
+		List<Book> books = bookMapper.getPageData(page.getStartindex(), page.getPagesize(), category_id);
 		page.setList(books);
-		return page;*/
-		return null;
+		return page;
 
 	}
 
@@ -173,7 +173,7 @@ public class BusinessServiceImpl implements BusinessService {
 	 */
 	public User findUser(String username, String password) {
 //		return udao.find(username, password);
-		return null;
+		return userMapper.queryUser(username,password);
 	}
 
 	/*
@@ -201,7 +201,10 @@ public class BusinessServiceImpl implements BusinessService {
 			order.getOrderitems().add(oitem);
 
 		}
+
 		//odao.add(order);
+		orderMapper.insertOrder(order);
+		//orderMapper.insertOrder(order.getId(),order.getOrdertime(),order.getPrice(),order.isState(),order.getUser().getId());
 	}
 
 	/*
@@ -218,7 +221,7 @@ public class BusinessServiceImpl implements BusinessService {
 	@Override
 	public List<Order> listOrder(String state) {
 //		return odao.getAll(Boolean.parseBoolean(state));
-		return null;
+		return orderMapper.queryOrders(Boolean.parseBoolean(state));
 	}
 
 	/*

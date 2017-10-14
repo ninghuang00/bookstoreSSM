@@ -103,4 +103,9 @@
       email = #{email,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <select id="queryUser" parameterType="java.lang.String">
+    SELECT * FROM user
+    WHERE username = #{0}
+    AND password = #{1}
+  </select>
 </mapper>

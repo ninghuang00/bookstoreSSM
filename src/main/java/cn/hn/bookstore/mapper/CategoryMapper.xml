@@ -9,6 +9,13 @@
   <sql id="Base_Column_List">
     id, name, description
   </sql>
+
+  <select id="queryAllCategories" resultType="cn.hn.bookstore.po.Category">
+    select
+    <include refid="Base_Column_List" />
+    from category
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultType="cn.hn.bookstore.po.Category">
     select 
     <include refid="Base_Column_List" />
