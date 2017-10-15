@@ -230,7 +230,7 @@ public class BusinessServiceImpl implements BusinessService {
 	@Override
 	public Order findOrder(String orderid) {
 //		return odao.find(orderid);
-		return null;
+		return orderMapper.queryOrder(orderid);
 	}
 
 	/*

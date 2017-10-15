@@ -11,17 +11,66 @@
         VALUES (#{id},#{ordertime},#{price},#{state},#{user.id})
     </insert>
     <!--查找所有订单-->
+    <!--<resultMap id="OrdersMap" type="Order">-->
+        <!--<id property="id" column="id"/>-->
+        <!--<association property="user" select="selectUser" column="user_id" javaType="User"/>-->
+    <!--</resultMap>-->
+    <!--<select id="queryOrders" parameterType="Boolean" resultMap="OrdersMap">-->
+        <!--SELECT * from orders-->
+        <!--WHERE state = #{0}-->
+    <!--</select>-->
+    <!--<select id="selectUser" parameterType="String" resultType="User">-->
+        <!--SELECT * FROM user-->
+        <!--WHERE id = #{id}-->
+    <!--</select>-->
+    <resultMap id="OrdersMap" type="Order">
+        <id property="id" column="id"/>
+        <result column="ordertime" property="ordertime"/>
+        <association property="user" column="user_id" javaType="User">
+            <id property="id" column="user_id"/>
+            <result column="username" property="username"/>
+        </association>
+    </resultMap>
+    <select id="queryOrders" parameterType="Boolean" resultMap="OrdersMap">
+        SELECT o.id,o.ordertime,o.price,o.state,o.user_id,
+            u.username,u.password,u.phonenumber,u.email,u.address
+        FROM orders o
+        LEFT JOIN user u
+            ON o.state = #{0} AND o.user_id = u.id
+
+    </select>
+    <!--查询单个订单-->
     <resultMap id="OrderMap" type="Order">
         <id property="id" column="id"/>
         <association property="user" select="selectUser" column="user_id" javaType="User"/>
+        <collection property="orderitems" select="selectItems" column="id" ofType="OrderItem"/>
     </resultMap>
-    <select id="queryOrders" parameterType="Boolean" resultMap="OrderMap">
+    <select id="queryOrder" parameterType="String" resultMap="OrderMap">
         SELECT * from orders
-        WHERE state = #{0}
+        WHERE id = #{0}
+    </select>
+    <resultMap id="OrderItemMap" type="OrderItem">
+        <id property="id" column="id"/>
+        <association property="book" select="selectBook" column="book_id" javaType="Book"/>
+    </resultMap>
+    <select id="selectItems" parameterType="String" resultMap="OrderItemMap">
+        SELECT * FROM orderitem
+        where order_id = #{id}
     </select>
     <select id="selectUser" parameterType="String" resultType="User">
         SELECT * FROM user
         WHERE id = #{id}
     </select>
+    <select id="selectBook" parameterType="String" resultType="Book">
+        SELECT * FROM book
+        WHERE id = #{id}
+    </select>
 
+    <!--&lt;!&ndash;查询一本书&ndash;&gt;-->
+    <!--<resultMap id="BookMap" type="Book">-->
+        <!--<association property="book" select="selectBook" column=""/>-->
+    <!--</resultMap>-->
+    <!--<select id="selectOrderItems" parameterType="String" resultType="OrderItem">-->
+        <!--select b.* from orderitem o,book b where o.id=? and o.book_id=b.id-->
+    <!--</select>-->
 </mapper>

@@ -17,4 +17,6 @@ public interface OrderMapper {
     void insertOrder(Order order);
 
     List<Order> queryOrders(boolean state);
+
+    Order queryOrder(String orderid);
 }

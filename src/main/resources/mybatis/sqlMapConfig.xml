@@ -7,6 +7,13 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <configuration>
 
 <!-- 全局setting配置 -->
+  <settings>
+    <!--开启延迟加载功能-->
+    <setting name="lazyLoadingEnabled" value="true"/>
+    <!--对任意延迟属性的调用会使带有延迟加载属性的对象完整加载-->
+    <!--即将积极加载改成按需加载-->
+    <setting name="aggressiveLazyLoading" value="false"/>
+  </settings>
 
 <!-- 定义别名 -->
 <typeAliases>

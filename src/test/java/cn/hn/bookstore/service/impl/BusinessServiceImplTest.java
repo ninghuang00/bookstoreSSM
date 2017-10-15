@@ -8,6 +8,8 @@ import cn.hn.bookstore.po.User;
 import cn.hn.bookstore.service.BusinessService;
 import cn.hn.bookstore.test.SpringTest;
 import cn.hn.bookstore.util.WebUtils;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,8 @@ import static org.junit.Assert.*;
 public class BusinessServiceImplTest extends SpringTest{
     @Autowired
     BusinessService businessService;
+    @Autowired
+    SqlSessionFactory sqlSessionFactory;
 
 
     @Test
@@ -79,4 +83,26 @@ public class BusinessServiceImplTest extends SpringTest{
         List<Order> orders = businessService.listOrder("true");
         System.out.println();
     }
+
+    @Test
+    public void findOrder() throws Exception {
+        Order order = businessService.findOrder("51807f4e-ff08-404c-b5d2-1778c4ad05c8");
+
+        System.out.println();
+        User user = order.getUser();
+        System.out.println();
+    }
+
+    /*@Test
+    public void findOrder2() throws Exception {
+
+        //获取SQLSession
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        //指定mapper接口类型,mybatis通过动态代理的方式实现mapper接口
+        OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+        Order order = orderMapper.queryOrder("51807f4e-ff08-404c-b5d2-1778c4ad05c8");
+        System.out.println();
+        User user = order.getUser();
+        System.out.println();
+    }*/
 }
