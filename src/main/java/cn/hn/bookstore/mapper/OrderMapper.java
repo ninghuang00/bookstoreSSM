@@ -1,6 +1,7 @@
 package cn.hn.bookstore.mapper;
 
 import cn.hn.bookstore.po.Order;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -19,4 +20,6 @@ public interface OrderMapper {
     List<Order> queryOrders(boolean state);
 
     Order queryOrder(String orderid);
+
+    void updateOrderState(@Param("id") String orderid, @Param("state") Boolean state);
 }

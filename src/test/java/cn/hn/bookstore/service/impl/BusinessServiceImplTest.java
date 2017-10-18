@@ -1,10 +1,8 @@
 package cn.hn.bookstore.service.impl;
 
+import cn.hn.bookstore.mapper.BookMapper;
 import cn.hn.bookstore.mapper.OrderMapper;
-import cn.hn.bookstore.po.Cart;
-import cn.hn.bookstore.po.Category;
-import cn.hn.bookstore.po.Order;
-import cn.hn.bookstore.po.User;
+import cn.hn.bookstore.po.*;
 import cn.hn.bookstore.service.BusinessService;
 import cn.hn.bookstore.test.SpringTest;
 import cn.hn.bookstore.util.WebUtils;
@@ -93,6 +91,25 @@ public class BusinessServiceImplTest extends SpringTest{
         System.out.println();
     }
 
+    @Test
+    public void queryAllCategories() throws Exception {
+        List<Category> list = businessService.getAllCategory();
+        System.out.println();
+    }
+    @Autowired
+    private BookMapper bookMapper;
+    @Test
+    public void getTotalRecord() throws Exception {
+        bookMapper.getTotalRecord(null);
+        System.out.println();
+    }
+
+
+    @Test
+    public void getPage() throws Exception {
+        Page page = businessService.getPageData(null,null);
+        System.out.println();
+    }
     /*@Test
     public void findOrder2() throws Exception {
 

@@ -42,6 +42,8 @@ public interface BusinessService {
 
 	List<Privilege> getPrivileges(String id);
 
+	User findUser(String username,String password);
+
 
 	//boolean isCustomerExist(Customer customer);
 }

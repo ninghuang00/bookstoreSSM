@@ -118,16 +118,16 @@
     SELECT *
     from book
   </select>
-  <select id="getTotalRecord" parameterType="java.lang.String">
+  <select id="getTotalRecord" parameterType="java.lang.String" resultType="int">
     SELECT COUNT(*)
     FROM  book
     <where>
-      <if test="#{category_id} != null">
+      <if test="#{category_id} != null and #{category_id} != ''">
         category_id = #{category_id,jdbcType=VARCHAR}
       </if>
     </where>
   </select>
-  <select id="getPageData" >
+  <select id="getPageData" resultType="Book">
     SELECT * FROM book
     <where>
       <if test="#{category_id} != null">

@@ -66,6 +66,13 @@
         WHERE id = #{id}
     </select>
 
+    <!--更新数据库订单状态-->
+    <update id="updateOrder" >
+        UPDATE orders SET state = #{state}
+        WHERE id = #{id}
+    </update>
+
+
     <!--&lt;!&ndash;查询一本书&ndash;&gt;-->
     <!--<resultMap id="BookMap" type="Book">-->
         <!--<association property="book" select="selectBook" column=""/>-->

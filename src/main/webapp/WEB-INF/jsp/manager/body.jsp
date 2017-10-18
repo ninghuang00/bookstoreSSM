@@ -4,10 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>前台首页</title>
+<title>后台首页body</title>
 </head>
-<frameset rows="25%,*">
-	<frame src="${pageContext.request.contextPath }/head.action" name="head">
-	<frame src="${pageContext.request.contextPath }/queryAll.action" name="body">
-</frameset>
+<body>
+
+</body>
 </html>

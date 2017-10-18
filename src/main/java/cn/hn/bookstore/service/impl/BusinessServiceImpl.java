@@ -241,6 +241,9 @@ public class BusinessServiceImpl implements BusinessService {
 //		Order order = odao.find(orderid);
 //		order.setState(true);
 //		odao.update(order);
+		//Order order = orderMapper.queryOrder(orderid);
+		//order.setState(true);
+		orderMapper.updateOrderState(orderid,true);
 	}
 	@Override
 	public List<Privilege> getPrivileges(String id) {
